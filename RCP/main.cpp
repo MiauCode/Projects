@@ -47,7 +47,7 @@ void get_results(string player, string bot){
 }
 
 
-bool input_cheker(string input, int type){
+bool input_cheker(string& input, int type){
 
     to_lower(input);
 
@@ -55,24 +55,24 @@ bool input_cheker(string input, int type){
     set<string> rematch_inputs = {"y", "n"};
 
     if (type == 1){
+
         if (inputs.find(input) == inputs.end() ){
             return false;
         }
+
         return true;
     }
+
     else{
-        if (rematch_inputs.find(input) == inputs.end() ){
+
+        if (rematch_inputs.find(input) == rematch_inputs.end() ){
             return false;
         }
+
         else{
-            //cout << input << " chekkaa tää" << endl;
             return true;
         }
-
-
     }
-
-
 }
 
 
@@ -105,7 +105,7 @@ string get_players_choice(){
         cout << endl;
 
         if (!input_cheker(hand, 1)){
-            cout << WRONG_INPUT << endl << endl << "> ";
+            cout << WRONG_INPUT << endl << endl;
         }
         else{
             return hand;
@@ -115,7 +115,7 @@ string get_players_choice(){
 
 bool ask_rematch(){
 
-    while (bool flag = true){
+    while (true){
 
         string rematch;
         getline(cin, rematch);
@@ -138,16 +138,12 @@ bool ask_rematch(){
 }
 
 
-int main()
-{
+int main(){
 
     while (true){
 
         cin.clear();
         cout << "> Choose your hand Rock (R), Paper (P), Scissors (S): " << endl;
-
-
-
 
         string players_hand = get_players_choice();
         string bot_hand = generate_random_hand();
